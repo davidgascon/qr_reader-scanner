@@ -23,6 +23,7 @@ except:
 numberSet = True #while testing, set this equal to true to avoid the loop. True will just use the below number whereas False will prompt the loop
 number = 25
 
+
 while numberSet == False:
 	try:
 		number = int(input("How many signature cards do you want to create?"))
@@ -31,6 +32,7 @@ while numberSet == False:
 		break
 	except:
 		print("Please enter an integer.")
+
 
 
 #checks for the created folder
@@ -74,6 +76,8 @@ for number in range(number):
 	account.font = ImageFont.truetype(r'C:\Windows\Fonts\Constantia\constani.ttf', 45) 
 	account.text((495,423), str(random.randint(100000001, 999999999)), font = account.font, fill=(0,0,0))
 
+
+	
 	sigcard.save(f"created/{number}.jpg")
 print("Done!!")
 exit()

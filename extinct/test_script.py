@@ -33,3 +33,6 @@ for file in os.listdir("created/"): #for file in created folder
 	string = string.split("Account Number:")
 	accountnumber = re.findall('[0-9]+', string[1])
 	print(f"Account number for this card is {accountnumber[0]}")
+
+	if int(accountnumber) < 10000:
+		file.save(f"converted/{accountnumber}.jpg")
