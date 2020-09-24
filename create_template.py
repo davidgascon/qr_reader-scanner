@@ -53,10 +53,12 @@ with open("misc/last_names.txt") as last_name_file:
 			if name != '':
 				last_names_list.append(name)
 #print(last_names_list)
+
+#writes name
 randomname = random.choice(first_names_list) + " " + random.choice(last_names_list)
 name = ImageDraw.Draw(template)
 name.font = ImageFont.truetype(r'C:\Windows\Fonts\Constantia\constani.ttf', 10) 
-title.text((90,86), randomname, font = name.font, fill=(0,0,0))
+#title.text((90,86), randomname, font = name.font, fill=(0,0,0))
 
 
 #writes name title
@@ -65,22 +67,15 @@ accounttitle.font = ImageFont.truetype(r'C:\Windows\Fonts\Constantia\constanz.tt
 accounttitle.text((25,96), "Account Number:", font = accounttitle.font, fill=(0,0,0))
 
 
-#writes account title
-account = ImageDraw.Draw(template)
-account.font = ImageFont.truetype(r'C:\Windows\Fonts\Constantia\constani.ttf', 10) 
-title.text((110,94), str(random.randint(100000001, 999999999)), font = account.font, fill=(0,0,0))
-
-#writes name title
 
 
-
-
+#writes account disclosures title
 disclosuretitle = ImageDraw.Draw(template)
 disclosuretitle.font = ImageFont.truetype(r'C:\Windows\Fonts\Constantia\constanz.ttf', 10) 
 disclosuretitle.text((291,140), "Account Disclosures", font = disclosuretitle.font, fill=(0,0,0))
 
 
-#writes disclosure title
+#writes disclosure content
 disclosuretext = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. In cursus turpis massa tincidunt dui ut ornare lectus. Consequat interdum varius sit amet mattis vulputate enim nulla aliquet. Amet tellus cras adipiscing enim eu. Sit amet mattis vulputate enim nulla aliquet porttitor lacus luctus. Cras tincidunt lobortis feugiat vivamus at augue eget arcu. Volutpat maecenas volutpat blandit aliquam. Vitae tortor condimentum lacinia quis vel eros donec. Ut etiam sit amet nisl purus in mollis. Nibh sit amet commodo nulla facilisi.\nDui ut ornare lectus sit amet est placerat. Nunc faucibus a pellentesque sit amet porttitor eget dolor morbi. Eu facilisis sed odio morbi quis commodo. Arcu cursus vitae congue mauris. Pulvinar etiam non quam lacus. Dolor sit amet consectetur adipiscing elit. Aliquam eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis. Nunc eget lorem dolor sed viverra ipsum nunc aliquet bibendum. Consectetur adipiscing elit duis tristique sollicitudin nibh sit. Lectus vestibulum mattis ullamcorper velit sed ullamcorper. Velit ut tortor pretium viverra suspendisse. Sit amet consectetur adipiscing elit pellentesque. Tellus id interdum velit laoreet id donec ultrices. Felis bibendum ut tristique et egestas. Elementum integer enim neque volutpat. Amet consectetur adipiscing elit pellentesque. Eget lorem dolor sed viverra ipsum. Consectetur adipiscing elit duis tristique."
 disclosuretextarray = wrap(disclosuretext, width=57)
 print(disclosuretextarray)
@@ -91,6 +86,14 @@ for text in disclosuretextarray:
 	title.text((291,150+(row*10)), text, font = disclosure.font, fill=(0,0,0))
 	row += 1
 
+#writes signature title
+signaturetitle = ImageDraw.Draw(template)
+signaturetitle.font = ImageFont.truetype(r'C:\Windows\Fonts\Constantia\constanz.ttf', 10) 
+signaturetitle.text((30, 668), "Signature 1: ", font = signaturetitle.font, fill=(0,0,0))
+
+signature2title = ImageDraw.Draw(template)
+signature2title.font = ImageFont.truetype(r'C:\Windows\Fonts\Constantia\constanz.ttf', 10) 
+signature2title.text((30, 698), "Signature 2: ", font = signature2title.font, fill=(0,0,0))
 
 
 
@@ -101,6 +104,9 @@ template = cv2.imread("template.jpg")
 border = cv2.rectangle(template, (10,10), (553, 740), (0, 0, 0), 2) #draws the border
 customer_information_border = cv2.rectangle(template, (20, 75), (543, 125), (0, 0, 0), 1) #draws the border around customer information
 disclosure_border = cv2.rectangle(template, (281, 130), (543, 450), (0, 0, 0), 1) #draws the border around the disclosure stuff
+signature_border = cv2.rectangle(template, (20, 650), (543, 720), (0, 0, 0), 1) #draws the border around the disclosure stuff
+signature_line = cv2.line(template, (85, 680), (270,680), (0, 0, 0), 1)
+signature_line2 = cv2.line(template, (85, 710), (270,710), (0, 0, 0), 1)
 
 cv2.imwrite('template.jpg', template)
 cv2.imshow('template', template)
