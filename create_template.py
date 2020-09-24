@@ -16,20 +16,31 @@ except:
 	print("CSV not installed. Google the PIP command to install. Exiting now.")
 	exit()
 
-imagewidth = 563
-imageheight = 750
+
+
+#imagewidth = 563
+#imageheight = 750
+
+def neww(width):
+	newwidth = ((width/563)*2550)
+	return newwidth
+def newh(height):
+	newheight = ((height/750)*3300)
+	return newheight
+imagewidth = 2550
+imageheight = 3300
 
 template = Image.new('RGB', (imagewidth, imageheight), 'white')
 
 #writes title
 title = ImageDraw.Draw(template)
-title.font = ImageFont.truetype(r'C:\Windows\Fonts\Constantia\constanz.ttf', 20) 
-title.text((225,35), "Signature Card", font = title.font, fill=(0,0,0), size=20)
+title.font = ImageFont.truetype(r'C:\Windows\Fonts\Times New Roman\timesbd.ttf', 90) 
+title.text((neww(225),newh(35)), "Signature Card", font = title.font, fill=(0,0,0))
 
 #writes name title
 nametitle = ImageDraw.Draw(template)
-nametitle.font = ImageFont.truetype(r'C:\Windows\Fonts\Constantia\constanz.ttf', 10) 
-nametitle.text((25,85), "Client Name:", font = nametitle.font, fill=(0,0,0))
+nametitle.font = ImageFont.truetype(r'C:\Windows\Fonts\Times New Roman\timesbd.ttf', 45) 
+nametitle.text((neww(25),newh(85)), "Client Name:", font = nametitle.font, fill=(0,0,0))
 
 
 #writes name
@@ -57,22 +68,22 @@ with open("misc/last_names.txt") as last_name_file:
 #writes name
 randomname = random.choice(first_names_list) + " " + random.choice(last_names_list)
 name = ImageDraw.Draw(template)
-name.font = ImageFont.truetype(r'C:\Windows\Fonts\Constantia\constani.ttf', 10) 
+name.font = ImageFont.truetype(r'C:\Windows\Fonts\Constantia\constani.ttf', 45) 
 #title.text((90,86), randomname, font = name.font, fill=(0,0,0))
 
 
 #writes name title
 accounttitle = ImageDraw.Draw(template)
-accounttitle.font = ImageFont.truetype(r'C:\Windows\Fonts\Constantia\constanz.ttf', 10) 
-accounttitle.text((25,96), "Account Number:", font = accounttitle.font, fill=(0,0,0))
+accounttitle.font = ImageFont.truetype(r'C:\Windows\Fonts\Times New Roman\timesbd.ttf', 45) 
+accounttitle.text((neww(25),newh(96)), "Account Number:", font = accounttitle.font, fill=(0,0,0))
 
 
 
 
 #writes account disclosures title
 disclosuretitle = ImageDraw.Draw(template)
-disclosuretitle.font = ImageFont.truetype(r'C:\Windows\Fonts\Constantia\constanz.ttf', 10) 
-disclosuretitle.text((291,140), "Account Disclosures", font = disclosuretitle.font, fill=(0,0,0))
+disclosuretitle.font = ImageFont.truetype(r'C:\Windows\Fonts\Times New Roman\timesbd.ttf', 45) 
+disclosuretitle.text((neww(291),newh(148)), "Account Disclosures", font = disclosuretitle.font, fill=(0,0,0))
 
 
 #writes disclosure content
@@ -80,20 +91,20 @@ disclosuretext = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed d
 disclosuretextarray = wrap(disclosuretext, width=57)
 print(disclosuretextarray)
 disclosure = ImageDraw.Draw(template)
-disclosure.font = ImageFont.truetype(r'C:\Windows\Fonts\Constantia\constani.ttf', 10) 
+disclosure.font = ImageFont.truetype(r'C:\Windows\Fonts\Constantia\constani.ttf', 45) 
 row = 0
 for text in disclosuretextarray:
-	title.text((291,150+(row*10)), text, font = disclosure.font, fill=(0,0,0))
+	title.text((neww(291),newh(165+(row*10))), text, font = disclosure.font, fill=(0,0,0))
 	row += 1
 
 #writes signature title
 signaturetitle = ImageDraw.Draw(template)
-signaturetitle.font = ImageFont.truetype(r'C:\Windows\Fonts\Constantia\constanz.ttf', 10) 
-signaturetitle.text((30, 668), "Signature 1: ", font = signaturetitle.font, fill=(0,0,0))
+signaturetitle.font = ImageFont.truetype(r'C:\Windows\Fonts\Constantia\constanz.ttf', 45) 
+signaturetitle.text((neww(30), newh(668)), "Signature 1: ", font = signaturetitle.font, fill=(0,0,0))
 
 signature2title = ImageDraw.Draw(template)
-signature2title.font = ImageFont.truetype(r'C:\Windows\Fonts\Constantia\constanz.ttf', 10) 
-signature2title.text((30, 698), "Signature 2: ", font = signature2title.font, fill=(0,0,0))
+signature2title.font = ImageFont.truetype(r'C:\Windows\Fonts\Constantia\constanz.ttf', 45) 
+signature2title.text((neww(30), newh(698)), "Signature 2: ", font = signature2title.font, fill=(0,0,0))
 
 
 
@@ -101,13 +112,20 @@ template.save('template.jpg')
 
 template = cv2.imread("template.jpg")
 
-border = cv2.rectangle(template, (10,10), (553, 740), (0, 0, 0), 2) #draws the border
-customer_information_border = cv2.rectangle(template, (20, 75), (543, 125), (0, 0, 0), 1) #draws the border around customer information
-disclosure_border = cv2.rectangle(template, (281, 130), (543, 450), (0, 0, 0), 1) #draws the border around the disclosure stuff
-signature_border = cv2.rectangle(template, (20, 650), (543, 720), (0, 0, 0), 1) #draws the border around the disclosure stuff
-signature_line = cv2.line(template, (85, 680), (270,680), (0, 0, 0), 1)
-signature_line2 = cv2.line(template, (85, 710), (270,710), (0, 0, 0), 1)
+border = cv2.rectangle(template, (45, 45), (2489, 3255), (0, 0, 0), 7) #draws the border
+customer_information_border = cv2.rectangle(template, (85, 337), (2443, 562), (0, 0, 0), 5) #draws the border around customer information
+disclosure_border = cv2.rectangle(template, (1264, 615), (2443, 2025), (0, 0, 0), 3) #draws the border around the disclosure stuff
+signature_border = cv2.rectangle(template, (85, 2925), (2443, 3225), (0, 0, 0), 3) #draws the border around the disclosure stuff
+signature_line = cv2.line(template, (382, 3060), (1215, 3060), (0, 0, 0), 3)
+signature_line2 = cv2.line(template, (382, 3195), (1215,3195), (0, 0, 0), 3)
 
 cv2.imwrite('template.jpg', template)
+
+scale_percent = 20 # percent of original size
+width = int(template.shape[1] * scale_percent / 100)
+height = int(template.shape[0] * scale_percent / 100)
+dim = (width, height)
+
+template = cv2.resize(template, dim, interpolation = cv2.INTER_AREA)
 cv2.imshow('template', template)
 cv2.waitKey(0)

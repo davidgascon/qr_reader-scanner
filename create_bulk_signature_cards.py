@@ -21,7 +21,7 @@ except:
 
 #used for the loop to get user to enter a valid number.
 numberSet = True #while testing, set this equal to true to avoid the loop. True will just use the below number whereas False will prompt the loop
-number = 5
+number = 25
 
 while numberSet == False:
 	try:
@@ -66,13 +66,13 @@ for number in range(number):
 
 	#writes name
 	name = ImageDraw.Draw(sigcard)
-	name.font = ImageFont.truetype(r'C:\Windows\Fonts\Constantia\constani.ttf', 10) 
-	name.text((90,86), randomname, font = name.font, fill=(0,0,0))
+	name.font = ImageFont.truetype(r'C:\Windows\Fonts\Constantia\constani.ttf', 45) 
+	name.text((405,387), randomname, font = name.font, fill=(0,0,0))
 
 	#writes new account number
 	account = ImageDraw.Draw(sigcard)
-	account.font = ImageFont.truetype(r'C:\Windows\Fonts\Constantia\constani.ttf', 10) 
-	account.text((110,94), str(random.randint(100000001, 999999999)), font = account.font, fill=(0,0,0))
+	account.font = ImageFont.truetype(r'C:\Windows\Fonts\Constantia\constani.ttf', 45) 
+	account.text((495,423), str(random.randint(100000001, 999999999)), font = account.font, fill=(0,0,0))
 
 	sigcard.save(f"created/{number}.jpg")
 print("Done!!")
