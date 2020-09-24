@@ -10,6 +10,11 @@ try:
 except:
 	print("Random not installed. pip install random. Exiting now.")
 	exit()
+try:
+	import csv
+except:
+	print("CSV not installed. Google the PIP command to install. Exiting now.")
+	exit()
 
 imagewidth = 563
 imageheight = 750
@@ -27,10 +32,31 @@ nametitle.font = ImageFont.truetype(r'C:\Windows\Fonts\Constantia\constanz.ttf',
 nametitle.text((25,85), "Client Name:", font = nametitle.font, fill=(0,0,0))
 
 
-#writes name title
+#writes name
+first_names_list = []
+with open("misc/first_names.txt") as first_name_file:
+	first_names = csv.reader(first_name_file)
+
+	for name in first_names:
+		for name in name:
+			if name != '':
+				first_names_list.append(name)
+#print(first_names_list)
+
+print("")
+last_names_list = []
+with open("misc/last_names.txt") as last_name_file:
+	last_names = csv.reader(last_name_file)
+
+	for name in last_names:
+		for name in name:
+			if name != '':
+				last_names_list.append(name)
+#print(last_names_list)
+randomname = random.choice(first_names_list) + " " + random.choice(last_names_list)
 name = ImageDraw.Draw(template)
 name.font = ImageFont.truetype(r'C:\Windows\Fonts\Constantia\constani.ttf', 10) 
-title.text((90,86), "David Gascon", font = name.font, fill=(0,0,0))
+title.text((90,86), randomname, font = name.font, fill=(0,0,0))
 
 
 #writes name title
@@ -45,6 +71,10 @@ account.font = ImageFont.truetype(r'C:\Windows\Fonts\Constantia\constani.ttf', 1
 title.text((110,94), str(random.randint(100000001, 999999999)), font = account.font, fill=(0,0,0))
 
 #writes name title
+
+
+
+
 disclosuretitle = ImageDraw.Draw(template)
 disclosuretitle.font = ImageFont.truetype(r'C:\Windows\Fonts\Constantia\constanz.ttf', 10) 
 disclosuretitle.text((291,140), "Account Disclosures", font = disclosuretitle.font, fill=(0,0,0))

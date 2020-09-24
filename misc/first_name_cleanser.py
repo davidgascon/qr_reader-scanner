@@ -17,6 +17,9 @@ print(first_names_clean)
 
 #saves the file as a txt
 file = open("first_names.txt", "w+")
+#file.write("[")
 for item in first_names_clean:
 	file.write(f"{item},")
+
+#file.write("]")
 file.close()
