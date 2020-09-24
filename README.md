@@ -11,6 +11,13 @@ Lessons learned
 -In the future, when working with a template, I should probably use a ratio instead of a defined position for where elements are in an image. For example, the border of the signature cards could have been something like the (.05*width, .05*height) for the top left cordinate. This will save time if the number of pixels need to be changed.
 -I had issues with PIL, Image and Pillow. Aparently you can only have either Pillow and Image installed, but not PIL and Image or PIL and Pillow installed. This caused issues with Pytesseract
 
+Things Learned this project
+-Image/pixel sizing when creating images
+-Tesseract reading incorrect information
+-Creating images from scratch
+-Regex package
+
+
 Steps to develop.
 1. Create a way to create a blank signature card (PIL) (done)
 2. Create a way to create (insert number here) number of 'fake' signature cards including some distortion to replicate a real scan. Save them in a folder. Also add a checkbox to add qr code/barcode
