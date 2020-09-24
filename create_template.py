@@ -5,6 +5,11 @@
 from PIL import Image, ImageDraw, ImageFont
 import cv2
 from textwrap import wrap
+try:
+	import random
+except:
+	print("Random not installed. pip install random. Exiting now.")
+	exit()
 
 imagewidth = 563
 imageheight = 750
@@ -37,7 +42,7 @@ accounttitle.text((25,96), "Account Number:", font = accounttitle.font, fill=(0,
 #writes account title
 account = ImageDraw.Draw(template)
 account.font = ImageFont.truetype(r'C:\Windows\Fonts\Constantia\constani.ttf', 10) 
-title.text((110,94), "954", font = account.font, fill=(0,0,0))
+title.text((110,94), random.randint(100000001, 999999999), font = account.font, fill=(0,0,0))
 
 #writes name title
 disclosuretitle = ImageDraw.Draw(template)
