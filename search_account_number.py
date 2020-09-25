@@ -32,22 +32,32 @@ if len(os.listdir("scans/")) > 0 :
 		print("Checking new sig document.")
 		#search for QR Code
 		image = cv2.imread('scans/' + file) #read the file
-		msg, points, _ = cv2.QRCodeDetector().detectAndDecode(image) #returns the message and a list of cordinates of where the qr code is. If none, then there's no qr code
+		ogmsg, points, _ = cv2.QRCodeDetector().detectAndDecode(image) #returns the message and a list of cordinates of where the qr code is. If none, then there's no qr code
 		if points is not None:
 			try:
-				msg = msg.replace(" ", "")
+				#cleans account number
+				msg = ogmsg.replace(" ", "")
 				print(f"Account number from QR Code is:{msg}")
 				msg = msg.split("accountnumber:")
 				
 				msg = msg[1]
 				msg = msg.split("-")
 				msg = msg[0]
-				msg = msg.replace(" ", "")
 				print(msg)
 				accountnumber = msg
 				qrscans = qrscans + 1
 				tesseractread = False
+
+				#cleans document type
+				doctype = ogmsg.replace(" ", "")
+				doctype = doctype.split("documentname:")
+				doctype = doctype[1]
+				doctype = doctype.split("-")
+				doctype = doctype[0]
+				print(doctype)
+
 			except:
+				
 				print("Error with reading QR Code.")
 				tesseractread = True
 		else:
@@ -70,9 +80,9 @@ if len(os.listdir("scans/")) > 0 :
 
 		
 
-		if int(accountnumber) > 10000:
+		if int(accountnumber) > 10000 :
 			img = Image.open('scans/' + file)
-			img.save(f"converted/{accountnumber}.jpg")
+			img.save(f"customer_files/{accountnumber}/signature_card.jpg")
 			os.remove(f"scans/{file}")
 		else:
 			img = Image.open('scans/' + file)

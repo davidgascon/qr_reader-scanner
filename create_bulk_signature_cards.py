@@ -27,7 +27,7 @@ except:
 
 #used for the loop to get user to enter a valid number.
 numberSet = True #while testing, set this equal to true to avoid the loop. True will just use the below number whereas False will prompt the loop
-number = 50
+number = 5
 
 
 while numberSet == False:
@@ -44,7 +44,8 @@ while numberSet == False:
 #checks for the created folder
 if not os.path.exists('scans'):
 	os.makedirs('scans')
-
+if not os.path.exists('customer_files'):
+	os.makedirs('customer_files')
 #loop to create signature cards
 for number in range(number):
 	sigcard = Image.open('template.jpg')
@@ -70,7 +71,11 @@ for number in range(number):
 					last_names_list.append(name)
 	#print(last_names_list)
 	randomname = random.choice(first_names_list) + " " + random.choice(last_names_list)
+	accountnumber = str(random.randint(100000001, 999999999))
 
+	#creates customer directory
+	if not os.path.exists(f"customer_files/{accountnumber}"):
+		os.makedirs(f"customer_files/{accountnumber}")
 
 	#writes name
 	name = ImageDraw.Draw(sigcard)
@@ -78,14 +83,13 @@ for number in range(number):
 	name.text((405,387), randomname, font = name.font, fill=(0,0,0))
 
 	#writes new account number
-	accountnumber = str(random.randint(100000001, 999999999))
 	account = ImageDraw.Draw(sigcard)
 	account.font = ImageFont.truetype(r'C:\Windows\Fonts\Times New Roman\timesbd.ttf', 45) 
 	account.text((495,423), accountnumber, font = account.font, fill=(0,0,0))
 	#sigcard.save(f"created/{number}.jpg")
 
 	#adds qr code
-	if random.randrange(0,2) == 1:
+	if random.randrange(0,1) == 0:
 		qrmessage = f"document name: signature card - account number: {str(accountnumber)} - name1: {randomname}"
 		print(qrmessage + " " + str(number))
 		qrcodeimg = qrcode.make(qrmessage, box_size=11)
@@ -96,6 +100,8 @@ for number in range(number):
 
 	
 	sigcard.save(f"scans/scan_number_{number+1}.jpg")
+
+	
 
 print("Done!")
 exit()
