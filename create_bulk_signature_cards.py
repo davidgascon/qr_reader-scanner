@@ -48,7 +48,7 @@ if bypass == False:
 		except:
 			print("Please answer with either yes or no.")
 else:
-	number = 5
+	number = 10
 	tiltSet = True #do you want to tilt the scans? Only if bypass is set to true.
 
 #checks for the created folder
@@ -112,7 +112,6 @@ for number in range(number):
 	#adds qr code
 	if random.randrange(0,1) == 0: #change 1 to 2 if you want to randomly add a qr code
 		qrmessage = f"document name: signature card - account number: {str(accountnumber)} - name1: {randomname}"
-		print(qrmessage + " " + str(number))
 		qrcodeimg = qrcode.make(qrmessage, box_size=11)
 		#qrcodeimg = qrcodeimg.resize((200,200))
 		sigcard.paste(qrcodeimg, (1900,2400))
@@ -121,6 +120,7 @@ for number in range(number):
 
 	path = f"scans/scan_number_{number+1}.jpg"
 	sigcard.save(path)
+	print(f"Signature card created for {randomname}.")
 
 	if tiltSet:
 		if random.choice(['yes', 'no']) == 'yes':
@@ -131,5 +131,5 @@ for number in range(number):
 
 
 
-print("Done!")
+print("\n\nDone creating all of the signature cards!")
 exit()
