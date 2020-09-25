@@ -26,20 +26,27 @@ except:
 	exit()
 
 #used for the loop to get user to enter a valid number.
-numberSet = True #while testing, set this equal to true to avoid the loop. True will just use the below number whereas False will prompt the loop
-number = 5
+bypass = True
 
+if bypass == False:
+	while numberSet == False:
+		try:
+			number = int(input("How many signature cards do you want to create?"))
+			number = number - 1 #We will use range later, which I believe includes 0
+			Numberset = True
+			break
+		except:
+			print("Please enter an integer.")
 
-while numberSet == False:
-	try:
-		number = int(input("How many signature cards do you want to create?"))
-		number = number - 1 #We will use range later, which I believe includes 0
-		Numberset = True
-		break
-	except:
-		print("Please enter an integer.")
-
-
+	while True and bypass == False:
+		try:
+			tiltSet = input("Do you want the scans to have a slight skew? Type yes or no.")
+			break
+		except:
+			print("Please answer with either yes or no.")
+else:
+	number = 5
+	tiltSet = True #do you want to tilt the scans? Only if bypass is set to true.
 
 #checks for the created folder
 if not os.path.exists('scans'):
@@ -98,10 +105,11 @@ for number in range(number):
 		#(2443, 3225)
 
 
-	
+	if tiltSet:
+		pass
 	sigcard.save(f"scans/scan_number_{number+1}.jpg")
 
-	
+
 
 print("Done!")
 exit()
