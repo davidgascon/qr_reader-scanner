@@ -31,6 +31,10 @@ imagewidth = 2550
 imageheight = 3300
 
 template = Image.new('RGB', (imagewidth, imageheight), 'white')
+title_font = r'C:\Windows\Fonts\Arial\arialbd.ttf'
+header_font = r'C:\Windows\Fonts\Arial\ARIALNB.TTF' 
+regular_font = r'C:\Windows\Fonts\Arial\arial.ttf' 
+
 
 #writes title
 title = ImageDraw.Draw(template)
@@ -72,12 +76,10 @@ name.font = ImageFont.truetype(r'C:\Windows\Fonts\Constantia\constani.ttf', 45)
 #title.text((90,86), randomname, font = name.font, fill=(0,0,0))
 
 
-#writes name title
+#writes name Number title
 accounttitle = ImageDraw.Draw(template)
 accounttitle.font = ImageFont.truetype(r'C:\Windows\Fonts\Times New Roman\timesbd.ttf', 45) 
-accounttitle.text((neww(25),newh(96)), "Account Number:", font = accounttitle.font, fill=(0,0,0))
-
-
+accounttitle.text((neww(25),newh(97)), "Account Number:", font = accounttitle.font, fill=(0,0,0))
 
 
 #writes account disclosures title
@@ -106,7 +108,25 @@ signature2title = ImageDraw.Draw(template)
 signature2title.font = ImageFont.truetype(r'C:\Windows\Fonts\Constantia\constanz.ttf', 45) 
 signature2title.text((neww(30), newh(698)), "Signature 2: ", font = signature2title.font, fill=(0,0,0))
 
+#writes account types title
+typetitle = ImageDraw.Draw(template)
+typetitle.font = ImageFont.truetype(r'C:\Windows\Fonts\Times New Roman\timesbd.ttf', 45) 
+typetitle.text((neww(25),newh(109)), "Account Type: ", font = typetitle.font, fill=(0,0,0))
 
+#writes customer information
+detailtitle = ImageDraw.Draw(template)
+detailtitle.font = ImageFont.truetype(f'{title_font}', 45) 
+detailtitle.text((neww(25), newh(148)), "Customer Details ", font = detailtitle.font, fill=(0,0,0))
+
+#writes each row of information
+details = ['Date of Birth', 'Address', 'SSN', 'Email', 'Phone Number', 'Estimated Debt']
+loop_counter = 0
+for detail in details:
+	details = ImageDraw.Draw(template)
+	details.font = ImageFont.truetype((f'{header_font}'), 45) 
+	details.text((neww(25), newh(165+(loop_counter*13))), detail, font = details.font, fill=(0,0,0))
+
+	loop_counter = loop_counter + 1
 
 template.save('template.jpg')
 
@@ -118,7 +138,7 @@ disclosure_border = cv2.rectangle(template, (1264, 615), (2443, 2025), (0, 0, 0)
 signature_border = cv2.rectangle(template, (85, 2925), (2443, 3225), (0, 0, 0), 3) #draws the border around the disclosure stuff
 signature_line = cv2.line(template, (382, 3060), (1215, 3060), (0, 0, 0), 3)
 signature_line2 = cv2.line(template, (382, 3195), (1215,3195), (0, 0, 0), 3)
-
+details_border = cv2.rectangle(template, (85, 615), (1200, 2025), (0, 0, 0), 3) #draws the border around the customer information
 cv2.imwrite('template.jpg', template)
 
 scale_percent = 20 # percent of original size

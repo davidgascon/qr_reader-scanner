@@ -29,6 +29,7 @@ except:
 bypass = True
 tiltMin = -5
 tiltMax = 5
+account_types = ['Checking', 'Savings']
 
 if bypass == False:
 	while numberSet == False:
@@ -88,15 +89,26 @@ for number in range(number):
 
 	#writes name
 	name = ImageDraw.Draw(sigcard)
-	name.font = ImageFont.truetype(r'C:\Windows\Fonts\Constantia\constani.ttf', 45) 
-	name.text((405,387), randomname, font = name.font, fill=(0,0,0))
+	name.font = ImageFont.truetype(r'C:\Windows\Fonts\Times New Roman\timesbd.ttf', 45) 
+	name.text((405,375), randomname, font = name.font, fill=(0,0,0))
+
+	#writes wet signature 
+	signature_list = ['VINERITC.TTF', 'constani.ttf', 'ITCBLKAD.TTF', 'BRUSHSCI.TTF', 'VLADIMIR.TTF']
+	wetsignaturetitle = ImageDraw.Draw(sigcard)
+	wetsignaturetitle.font = ImageFont.truetype(f"C:\Windows\Fonts\{random.choice(signature_list)}", 45) 
+	wetsignaturetitle.text((400, 3006), randomname, font = wetsignaturetitle.font, fill=(0,0,0))
 
 	#writes new account number
 	account = ImageDraw.Draw(sigcard)
 	account.font = ImageFont.truetype(r'C:\Windows\Fonts\Times New Roman\timesbd.ttf', 45) 
-	account.text((495,423), accountnumber, font = account.font, fill=(0,0,0))
-	#sigcard.save(f"created/{number}.jpg")
+	account.text((495,428), accountnumber, font = account.font, fill=(0,0,0))
 
+	#writes new type number
+	type = ImageDraw.Draw(sigcard)
+	type.font = ImageFont.truetype(r'C:\Windows\Fonts\Times New Roman\timesbd.ttf', 45) 
+	type.text((440,480), random.choice(account_types), font = type.font, fill=(0,0,0))
+
+	
 	#adds qr code
 	if random.randrange(0,1) == 0: #change 1 to 2 if you want to randomly add a qr code
 		qrmessage = f"document name: signature card - account number: {str(accountnumber)} - name1: {randomname}"
@@ -105,6 +117,8 @@ for number in range(number):
 		#qrcodeimg = qrcodeimg.resize((200,200))
 		sigcard.paste(qrcodeimg, (1900,2400))
 		#(2443, 3225)
+	
+
 	path = f"scans/scan_number_{number+1}.jpg"
 	sigcard.save(path)
 
