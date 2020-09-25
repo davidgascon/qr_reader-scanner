@@ -55,6 +55,7 @@ if len(os.listdir("scans/")) > 0 :
 				doctype = doctype.split("-")
 				doctype = doctype[0]
 				print(doctype)
+				reader_status = 'success'
 
 			except:
 				
@@ -65,22 +66,28 @@ if len(os.listdir("scans/")) > 0 :
 
 
 		if tesseractread == True:
-			print("tesseract reading document")
+			try:
+				print("tesseract reading document")
+			
+				#searches document for Account Number
+				img = Image.open('scans/' + file)
+				string = pytesseract.image_to_string(img, config='--psm 1') #
+
+
+				string = string.split("Account Number:")
+				accountnumber = re.findall('[0-9]+', string[1])
+				accountnumber = accountnumber[0]
+				print(f"Account number for this card is {accountnumber}")
+				tesseractscans = tesseractscans + 1
+				reader_status = 'success'
+			except:
+				print("Error reading tesseract scans. Try to improve your scan quality or manually move file.")
+				reader_status = 'failure'
+				accountnumber = 0
+
 		
-			#searches document for Account Number
-			img = Image.open('scans/' + file)
-			string = pytesseract.image_to_string(img, config='--psm 1') #
 
-
-			string = string.split("Account Number:")
-			accountnumber = re.findall('[0-9]+', string[1])
-			accountnumber = accountnumber[0]
-			print(f"Account number for this card is {accountnumber}")
-			tesseractscans = tesseractscans + 1
-
-		
-
-		if int(accountnumber) > 10000 :
+		if int(accountnumber) > 10000 and reader_status == 'success' :
 			img = Image.open('scans/' + file)
 			img.save(f"customer_files/{accountnumber}/signature_card.jpg")
 			os.remove(f"scans/{file}")

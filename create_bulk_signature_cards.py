@@ -103,11 +103,14 @@ for number in range(number):
 		#qrcodeimg = qrcodeimg.resize((200,200))
 		sigcard.paste(qrcodeimg, (1900,2400))
 		#(2443, 3225)
-
+	path = f"scans/scan_number_{number+1}.jpg"
+	sigcard.save(path)
 
 	if tiltSet:
-		pass
-	sigcard.save(f"scans/scan_number_{number+1}.jpg")
+		image = Image.open(path)
+		image = image.rotate(random.randrange(-10,10), expand=True)
+		image = image.save(path)
+	
 
 
 
