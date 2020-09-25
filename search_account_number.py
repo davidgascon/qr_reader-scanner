@@ -19,6 +19,7 @@ pytesseract.pytesseract.tesseract_cmd = 'C:\Program Files\Tesseract-OCR\Tesserac
 
 tesseractscans = 0
 qrscans = 0
+not_converted_total = 0
 
 #checks for the created folder, if it doesn't create it
 if not os.path.exists('converted'):
@@ -95,9 +96,11 @@ if len(os.listdir("scans/")) > 0 :
 			img = Image.open('scans/' + file)
 			img.save(f"not_converted/{accountnumber}.jpg")
 			os.remove(f"scans/{file}")
+			not_converted_total = not_converted_total + 1
 
-		print("\n\n\n")
+		print("\n")
 else:
 	print("No scans to read!")
+print(f"Scans not converted: {not_converted_total}")
 print(f"Tesseract Scans: {tesseractscans}")
 print(f"QR Scans: {qrscans}")

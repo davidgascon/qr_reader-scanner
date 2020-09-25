@@ -27,6 +27,8 @@ except:
 
 #used for the loop to get user to enter a valid number.
 bypass = True
+tiltMin = -5
+tiltMax = 5
 
 if bypass == False:
 	while numberSet == False:
@@ -96,7 +98,7 @@ for number in range(number):
 	#sigcard.save(f"created/{number}.jpg")
 
 	#adds qr code
-	if random.randrange(0,1) == 0:
+	if random.randrange(0,1) == 0: #change 1 to 2 if you want to randomly add a qr code
 		qrmessage = f"document name: signature card - account number: {str(accountnumber)} - name1: {randomname}"
 		print(qrmessage + " " + str(number))
 		qrcodeimg = qrcode.make(qrmessage, box_size=11)
@@ -107,9 +109,10 @@ for number in range(number):
 	sigcard.save(path)
 
 	if tiltSet:
-		image = Image.open(path)
-		image = image.rotate(random.randrange(-10,10), expand=True)
-		image = image.save(path)
+		if random.choice(['yes', 'no']) == 'yes':
+			image = Image.open(path)
+			image = image.rotate(random.randrange(tiltMin, tiltMax), expand=True)
+			image = image.save(path)
 	
 
 
