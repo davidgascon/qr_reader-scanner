@@ -1,7 +1,10 @@
 #create a bunch of signature cards
 
 #imports
-from PIL import Image, ImageDraw, ImageFont
+try:
+	from PIL import Image, ImageDraw, ImageFont
+except: 
+	print("Image package not installed. Pip install Image")
 import cv2
 try:
 	import random
@@ -27,8 +30,8 @@ except:
 
 #used for the loop to get user to enter a valid number.
 bypass = True
-tiltMin = -5
-tiltMax = 5
+tiltMin = -2
+tiltMax = 2
 account_types = ['Checking', 'Savings']
 
 if bypass == False:
@@ -50,7 +53,7 @@ if bypass == False:
 else:
 	number = 10
 	tiltSet = True #do you want to tilt the scans? Only if bypass is set to true.
-
+print(f"Creating {number} signature cards now.")
 #checks for the created folder
 if not os.path.exists('scans'):
 	os.makedirs('scans')
