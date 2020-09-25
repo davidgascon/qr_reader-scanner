@@ -12,6 +12,7 @@ import pytesseract
 
 import re
 
+import cv2
 
 #tesseract path
 pytesseract.pytesseract.tesseract_cmd = 'C:\Program Files\Tesseract-OCR\Tesseract.exe'
@@ -24,17 +25,33 @@ if not os.path.exists('converted'):
     os.makedirs('converted')
 
 for file in os.listdir("created/"): #for file in created folder
-	img = Image.open('created/' + file)
-	string = pytesseract.image_to_string(img, config='--psm 1')
-	string.replace(" ", "")
-	#print(string)
-	if "Signature" in string:
-		signaturecounter = signaturecounter + 1
-	if "Account Number" in string:
-		accountcounter = accountcounter + 1
+
+
+	#search for QR Code
+	image = cv2.imread('created/' + file)
+	msg, _, _ = cv2.QRCodeDetector().detectAndDecode(image) #we only use the msg not the other two returned variables
+	print(f"Account number from QR Code is:{msg}")
+	exit()
+
+
+
+
+
+
 	
+	#searches document for Account Number
+	img = Image.open('created/' + file)
+	string = pytesseract.image_to_string(img, config='--psm 1') #
+	#string.replace(" ", "")
+	#print(string)
+	#if "Signature" in string: #used to test to see how many times tesseract will find this word
+	#	signaturecounter = signaturecounter + 1
+	#if "Account Number" in string: #used to test to see how many times tesseract will find this word
+	#	accountcounter = accountcounter + 1
 	#print(f"Signautres: {signaturecounter}")
 	#print(f"account numbers: {accountcounter}")
+
+
 	string = string.split("Account Number:")
 	accountnumber = re.findall('[0-9]+', string[1])
 	accountnumber = accountnumber[0]
