@@ -22,9 +22,6 @@ qrscans = 0
 not_converted_total = 0
 
 #checks for the created folder, if it doesn't create it
-if not os.path.exists('converted'):
-    os.makedirs('converted')
-
 if not os.path.exists('not_converted'):
     os.makedirs('not_converted')
 
@@ -38,7 +35,7 @@ if len(os.listdir("scans/")) > 0 :
 			try:
 				#cleans account number
 				msg = ogmsg.replace(" ", "")
-				print(f"Account number from QR Code is:{msg}")
+				print(f"QR Message is:{msg}")
 				msg = msg.split("accountnumber:")
 				
 				msg = msg[1]

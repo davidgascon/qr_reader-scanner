@@ -4,7 +4,7 @@
 try:
 	from PIL import Image, ImageDraw, ImageFont
 except: 
-	print("Image package not installed. Pip install Image")
+	print("Image package not installed. Pip install Image ")
 import cv2
 try:
 	import random
@@ -29,22 +29,26 @@ except:
 	exit()
 
 #used for the loop to get user to enter a valid number.
-bypass = True
+bypass = False
 tiltMin = -2
 tiltMax = 2
 account_types = ['Checking', 'Savings']
+numberSet = False
 
 if bypass == False:
 	while numberSet == False:
 		try:
 			number = int(input("How many signature cards do you want to create?"))
-			number = number - 1 #We will use range later, which I believe includes 0
+			 #We will use range later, which I believe includes 0
 			Numberset = True
 			break
 		except:
 			print("Please enter an integer.")
 
 	while True and bypass == False:
+		tiltSet = True
+		break
+
 		try:
 			tiltSet = input("Do you want the scans to have a slight skew? Type yes or no.")
 			break
@@ -115,9 +119,9 @@ for number in range(number):
 	#adds qr code
 	if random.randrange(0,1) == 0: #change 1 to 2 if you want to randomly add a qr code
 		qrmessage = f"document name: signature card - account number: {str(accountnumber)} - name1: {randomname}"
-		qrcodeimg = qrcode.make(qrmessage, box_size=11)
+		qrcodeimg = qrcode.make(qrmessage, box_size=13)
 		#qrcodeimg = qrcodeimg.resize((200,200))
-		sigcard.paste(qrcodeimg, (1900,2400))
+		sigcard.paste(qrcodeimg, (1800,2300))
 		#(2443, 3225)
 	
 
